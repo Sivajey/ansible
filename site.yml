@@ -1,0 +1,6 @@
+---
+- hosts: server
+# remote_user: siva
+  become: true
+  roles:
+  - apache
