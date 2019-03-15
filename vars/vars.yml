@@ -1,0 +1,2 @@
+---
+new_secret: "{{ vault_new_secret }}"
