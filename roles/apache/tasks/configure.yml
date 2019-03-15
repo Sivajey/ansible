@@ -12,3 +12,9 @@
 
 - name: copy the image resource
   copy: src=Blue_marble_2015.jpg dest=/var/www/html/Blue_marble_2015.jpg
+
+- name: get the variables
+  include_vars: ./vars/vars.yml
+  
+- name: Secret
+  shell: echo  "{{ new_secret }} " > /var/www/html/credentials
