@@ -3,13 +3,5 @@
   become: true
   roles:
   - apache
-  vars_files:
-   - ./roles/apache/files/vault.yml
-   - ./vars/vars.yml
    
-  tasks:
-   - name: get the variables
-     include_vars: ./vars/vars.yml
   
-   - name: Secret
-     shell: echo  "secret info..{{ new_secret }} " /var/www/html/credentials
