@@ -1,17 +1,17 @@
-Ansible:
+# Ansible:
 
-why?
+# why?
 
 The server systems are the underlying foundation of our applications and thus, like our applications, they should be version controlled, tested and automated. As such we looked for a configuration management tool that could solve our automation needs.This is where Ansible truly shines, it has lowered the learning curve enough so that it is easier to use Ansible than to do manual stuff or shell scripting, even for a local install and configuration.
 
 
-What?
+# What?
 
 Ansible uses no agents and no additional custom security infrastructure. Essentially, the desired state of the entire IT infrastructure can be described in the form of Ansible Playbooks, which are files written in a very simple language, YAML.
 
 Ansible works by connecting to the nodes over SSH and pushing out small programs, called "Ansible Modules", to them. Ansible then executes and removes them when finished. Because these modules are simple Python scripts, and Ansible is agent-less, the target hosts only require an SSH connection and Python installed. Besides simplicity, which is another advantage of using Ansible vs Chef or Puppet, there are no servers, daemons, or databases required - all that is needed is to install Ansible on the host, Python on the targets, and have SSH access.
 
-How?
+# How?
 
 Ansible hosts are defined in a file, organised by groups and Playbooks can be applied to individual groups. The addresses of these hosts can be described using ranges and other operations. Finally, each host can have custom variables, such as SSH and sudo passwords.
 
@@ -23,7 +23,7 @@ By composing a playbook with multiple plays, it is possible to orchestrate multi
 Playbooks have the interesting characteristic of being idempotent, they ensure the system is in the desired state, and only run tasks if needed.
 
 
-Directory structure on Ansible role:
+# Directory structure on Ansible role:
 
 Defaults: The default variables for the role are been stored here inside this directory. These variables have the lowest priority.
 
@@ -40,7 +40,7 @@ Vars: This directory has high precedence than defaults directory and can only be
 Templates: This directory contains the Jinja to template inside this. Basically, all the dynamic files are being stored here which can be variablized.
 
 
-Best Practices:
+# Best Practices:
 
 Whitespace and Comments:
 Generous use of whitespace and breaking things up is really appreciated. One very important thing is the use of comments inside your roles so that someone using your role in future could be able to easily understand it properly.
