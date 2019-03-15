@@ -22,3 +22,46 @@ Playbooks are expressed in YAML format which makes them very simple and readable
 By composing a playbook with multiple plays, it is possible to orchestrate multi-machine deployments, running certain steps on all machines in the web servers group, then certain steps on the database server group, then more commands back on the web servers group, etc. 
 Playbooks have the interesting characteristic of being idempotent, they ensure the system is in the desired state, and only run tasks if needed.
 
+
+Directory structure on Ansible role:
+
+Defaults: The default variables for the role are been stored here inside this directory. These variables have the lowest priority.
+
+Files: All the static files are being stored here which are used inside the role. 
+
+Handlers: All the handlers are being used here not inside the Task directory. And automatically called upon from here.
+
+Meta: This directory contains the metadata about your role regarding the dependencies which are being required to run this role in any system, so it will not be run until the dependencies inside it are not been resolved.
+
+Tasks: This directory contains the main list of the tasks which needs to be executed by the role.
+
+Vars: This directory has high precedence than defaults directory and can only be overwritten by passing them On the command line, In the specific task or In a block.
+
+Templates: This directory contains the Jinja to template inside this. Basically, all the dynamic files are being stored here which can be variablized.
+
+
+Best Practices:
+
+Whitespace and Comments:
+Generous use of whitespace and breaking things up is really appreciated. One very important thing is the use of comments inside your roles so that someone using your role in future could be able to easily understand it properly.
+
+YAML format:
+Learn YAML format properly and use of indentation properly inside the document. Sometimes, when running the role gives the error for Invalid Syntax due to bad indentation format. And writing in proper Indentation makes your role look beautiful.
+
+Always Name Tasks:
+It is possible to leave off the ‘name’ for a given task, though it is recommended to provide a description about something is being done instead. This name is shown when that particular task is being run.
+
+Version Control:
+Use version control. Keep your roles and inventory files in git and commit when you make changes to them. This way you have an audit trail describing when and why you changed the rules that are automating your infrastructure. 
+
+Variable and Vaults:
+Since the variable contains sensitive data, so It is often easier to find variables using grep or similar tools inside the Ansible system. Since vaults obscure these variables, It is best to work with a layer of Indirection. This allows Ansible to find the variables inside the unencrypted file and all sensitive variables come from an encrypted file.
+The best approach to perform is to start with a group_vars subdirectory containing two more subdirectories inside it naming “Vars” and “Vaults”. Inside “Vars”  directory define all the variable including sensitive variables also. Now, copy those sensitive variables inside “Vault” directory while using the prefix “vault_*” for the variables. Now you should adjust the variables in the “Vars” to point the matching “vault_*” variables using jinja2 syntax and ensure that vault file is vault encrypted.
+
+Roles for multiple OS:
+Roles should be written in a way that they could be run on multiple Operating systems. Try to make your roles as generic as you can. But if you have created a role for some specific kind of operating system or some specific application, then try to explicitly define that inside the role name.
+
+Single role Single goal:
+Avoid tasks within a role which are not related to each other. Don’t build a common role. It’s ugly and bad for readability of your role.
+
+
