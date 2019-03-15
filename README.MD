@@ -65,7 +65,7 @@ Single role Single goal:
 Avoid tasks within a role which are not related to each other. Don’t build a common role. It’s ugly and bad for readability of your role.
 
 
-Ansible-Vault:
+# Ansible-Vault:
 
 Having infrastructure as code can pose the threat of exposing your sensitive data to the world, leading to unwanted security issues. Ansible Vault is a feature that allows you to keep all your secrets safe. It can encrypt entire files, entire YAML playbooks or even a few variables. It provides a facility where you can not only encrypt sensitive data but also integrate them into your playbooks.
 
@@ -93,7 +93,7 @@ vim ansible/vars/vars.yml
 new_secret: "{{ vault_new_secret }}"
 
 
-Running the  ansible-playbook:
+# Running the  ansible-playbook:
 
 git clone https://github.com/Sivajey/ansible.git
 
