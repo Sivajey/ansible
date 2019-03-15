@@ -65,3 +65,38 @@ Single role Single goal:
 Avoid tasks within a role which are not related to each other. Don’t build a common role. It’s ugly and bad for readability of your role.
 
 
+Ansible-Vault:
+
+Having infrastructure as code can pose the threat of exposing your sensitive data to the world, leading to unwanted security issues. Ansible Vault is a feature that allows you to keep all your secrets safe. It can encrypt entire files, entire YAML playbooks or even a few variables. It provides a facility where you can not only encrypt sensitive data but also integrate them into your playbooks.
+
+Vault is implemented with file-level granularity where the files are either entirely encrypted or entirely unencrypted. It uses the same password for encrypting as well as for decrypting files which makes using Ansible Vault very user-friendly.
+
+Creating a secret file:
+
+ansible-vault create secrets.txt
+
+You’ll be prompted to create a password and then confirm it by re-typing it.Then You can add data, save and exit. 
+
+Encrypting specific variables: 
+
+Best practice while using Ansible Vault is to encrypt only the sensitive data. In the example explained above, the development team does not want to share their password with the production and the staging team but they might need access to certain data to carry out their own task. In such cases you should only be encrypting the data you do not want to share with others, leaving the rest as it is. 
+
+ansible-vault create vault.yml
+
+add a new variable vault_new_secret = "your secret"  
+Save and exit.
+
+Importing the vault file:
+
+vim ansible/vars/vars.yml
+
+new_secret: "{{ vault_new_secret }}"
+
+
+Running the  ansible-playbook:
+
+git clone https://github.com/Sivajey/ansible.git
+
+ansible-playbook --ask-become-pass site.yml --ask-vault-pass 
+
+
